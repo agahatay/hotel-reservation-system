@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>HotelReservationSystem.Core</RootNamespace>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="HotelReservationSystem.Core.Models" />
+    <Using Include="HotelReservationSystem.Core.Domain" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="HotelReservationSystem.Tests" />
+  </ItemGroup>
+
+  <!-- The database scripts ship inside the assembly so the app can create its own database. -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\database\schema.sql" LogicalName="Scripts.schema.sql" />
+    <EmbeddedResource Include="..\..\database\seed.sql" LogicalName="Scripts.seed.sql" />
+  </ItemGroup>
+
+</Project>

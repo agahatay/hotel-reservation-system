@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>HotelReservationSystem</RootNamespace>
+    <AssemblyName>HotelReservationSystem</AssemblyName>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <ApplicationDefaultFont>Segoe UI, 9.75pt</ApplicationDefaultFont>
+
+    <Product>Hotel Reservation System</Product>
+    <Version>1.0.0</Version>
+    <Authors>Agah Atay Özbelli</Authors>
+    <Copyright>Copyright © 2026 Agah Atay Özbelli</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HotelReservationSystem.Core\HotelReservationSystem.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Kept next to the .exe (not bundled) so it can be edited after installation. -->
+    <None Update="appsettings.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="HotelReservationSystem.Core.Models" />
+    <Using Include="HotelReservationSystem.Core.Domain" />
+    <Using Include="HotelReservationSystem.Core.Services" />
+    <Using Include="HotelReservationSystem.Common" />
+  </ItemGroup>
+
+</Project>

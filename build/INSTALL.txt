@@ -1,0 +1,66 @@
+HOTEL RESERVATION SYSTEM — INSTALLATION
+========================================
+
+Requirements
+------------
+* Windows 10 or Windows 11, 64-bit.
+* Microsoft SQL Server 2016 or later. The free editions work:
+    - SQL Server Express:  https://www.microsoft.com/sql-server/sql-server-downloads
+    - SQL Server Express LocalDB (lightweight, ideal for a single PC; available as an
+      option in the SQL Server Express installer)
+* The .NET runtime is NOT required — it is included in HotelReservationSystem.exe.
+
+Quick start
+-----------
+1. Extract this ZIP to a folder, e.g. C:\Program Files\HotelReservationSystem
+   (or any folder you can write to).
+2. Start HotelReservationSystem.exe.
+3. If the database does not exist yet, the "Database settings" window opens:
+     - Server:   .\SQLEXPRESS            (SQL Server Express, default instance name)
+                 (localdb)\MSSQLLocalDB  (LocalDB)
+     - Database: HotelReservationDB
+   Click "Create / update database".
+     - Yes = load the fictional demo data (rooms, guests, reservations, demo accounts)
+     - No  = empty database; you will create the administrator account yourself
+   Then click "Save".
+4. Sign in.
+
+Demo accounts (only when the demo data was loaded)
+--------------------------------------------------
+    admin / Admin123!    (Administrator)
+    staff / Staff123!    (Staff)
+
+These are PUBLIC DEMONSTRATION credentials for the fictional demo database. You must choose
+a new password at the first sign-in. Never use the demo data or these passwords in production:
+for real use, create an empty database ("No" in step 3) and set up your own administrator.
+
+Configuration
+-------------
+* The application uses Windows (integrated) authentication. No database password is stored.
+* The connection string is read from, in order:
+    1. the HOTELRES_CONNECTION_STRING environment variable
+    2. %APPDATA%\HotelReservationSystem\appsettings.json  (written by "Database settings")
+    3. appsettings.json next to HotelReservationSystem.exe
+* Error logs: %LOCALAPPDATA%\HotelReservationSystem\logs
+
+Creating the database with sqlcmd instead (optional)
+----------------------------------------------------
+    powershell -ExecutionPolicy Bypass -File database\setup-database.ps1 -Server ".\SQLEXPRESS"
+    powershell -ExecutionPolicy Bypass -File database\setup-database.ps1 -SkipSeed   (no demo data)
+
+Troubleshooting
+---------------
+* "The database server could not be reached": check that the SQL Server service is running
+  (services.msc → "SQL Server (SQLEXPRESS)") and that the server name is correct.
+* "Cannot open database ... The login failed": the database does not exist yet — use
+  "Create / update database" — or your Windows account has no access to it.
+* Certificate errors on a remote server: install a trusted certificate on the server, or (for a
+  trusted local network only) tick "Trust server certificate".
+* Do not expose SQL Server directly to the internet.
+
+Uninstall
+---------
+Delete the application folder and %APPDATA%\HotelReservationSystem. The database can be removed
+with SQL Server Management Studio if no longer needed.
+
+Hotel Reservation System — developed by Agah Atay Özbelli. MIT License (see LICENSE.txt).
